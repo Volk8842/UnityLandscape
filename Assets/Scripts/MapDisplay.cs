@@ -6,26 +6,9 @@ public class MapDisplay : MonoBehaviour {
 
     public Renderer textureRenderer;
 
-    public void DrawNoiseMap(float[,] noiseMap)
+    public void DrawTexture(Texture2D texture)
     {
-        int width = noiseMap.GetLength(0);
-        int height = noiseMap.GetLength(1);
-
-        Texture2D texture = new Texture2D(width, height);
-
-        Color[] colorMap = new Color[width * height];
-        for (int j = 0; j < height; ++j)
-        {
-            for (int i = 0; i < width; ++i)
-            {
-                colorMap[i + j * width] = Color.Lerp(Color.white, Color.black, noiseMap[i, j]);
-            }
-        }
-
-        texture.SetPixels(colorMap);
-        texture.Apply();
-
         textureRenderer.sharedMaterial.mainTexture = texture;
-        textureRenderer.transform.localScale = new Vector3(width, 1, height);
+        textureRenderer.transform.localScale = new Vector3(texture.width, 1, texture.height);
     }
 }
